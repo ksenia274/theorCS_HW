@@ -16,26 +16,66 @@ fun executeInstructions(instructions: List<String>, input: String): Boolean {
                     return false
                 }
             }
+
+            "jmp" -> {
+                val target = parts[1].toInt()
+                programCounter = target
+            }
+
             "split" -> {
-                val target1 = parts[1].split(",")[0].toInt()
-                val target2 = parts[2].toInt()
-                if (inputIndex < input.length) {
-                    programCounter = target1
-                } else {
-                    programCounter = target2
+                var targets = mutableListOf<Int>()
+                var counter = 0
+                for (i in 1 until parts.size - 1) {
+                    targets.add(parts[i].split(",")[0].toInt())
+                }
+                targets.add(parts[parts.size - 1].toInt())
+                for (i in 0 until targets.size-1) {
+                    if (inputIndex < input.length &&
+                        input[inputIndex].toString() == instructions[targets[i]].split(" ")[1]
+                    ) {
+                        programCounter = targets[i]
+                        counter++
+                        break
+                    }
+                }
+                if (counter == 0 &&(inputIndex >= input.length ||
+                    instructions[targets[targets.size-1]] == "match" ||
+                    input[inputIndex].toString() == instructions[targets[targets.size-1]].split(" ")[1]
+                            )) {
+                    programCounter = targets[targets.size-1]
+                    counter++
+                }
+                if (counter == 0){
+                    return false
                 }
             }
+
             "match" -> {
                 return inputIndex == input.length
             }
+
             else -> throw IllegalArgumentException("Неподдерживаемая инструкция: $instruction")
         }
     }
 
     return false
 }
-fun generateInstructions(regex: String, alphabet: Set<Char>): List<String> {
+
+fun selectAlphabet(regex: String): MutableSet<Char> {
+    val operands = setOf<Char>('+', '?', '|', '*');
+    var alphabet = mutableSetOf<Char>();
+    for (char in regex) {
+        if (!operands.contains(char)) {
+            alphabet.add(char);
+        }
+    }
+    return alphabet;
+}
+
+fun generateInstructions(regex: String): List<String> {
+    val alphabet = selectAlphabet(regex)
     val instructions = mutableListOf<String>()
+    var pipeCount = mutableListOf<Int>(0);
 
     fun addInstruction(instruction: String) {
         instructions.add(instruction)
@@ -49,39 +89,78 @@ fun generateInstructions(regex: String, alphabet: Set<Char>): List<String> {
                 addInstruction("char $char")
                 current++
             }
+
             char == '|' -> {
-                val target1 = instructions.size + 2
-                val target2 = current + 1
-                addInstruction("split $target1, $target2")
-                val nextTarget = target2 + 1
-                addInstruction("jmp $nextTarget")
+                if (pipeCount[0] == 0) {
+                    val target1 = instructions.size
+                    val target2 = instructions.size + 2
+                    addInstruction("split $target1, $target2")
+                    instructions[current] = instructions[current - 1]
+                    instructions[current - 1] = "split $target1, $target2"
+                    val nextTarget = target2 + 1
+                    addInstruction("jmp $nextTarget")
+                    pipeCount.add(current - 1)
+                    pipeCount.add(current + 1)
+
+                } else {
+                    val target1 = instructions.size + 1
+                    val target2 = instructions.size + 2
+                    instructions[pipeCount[1]] += ", $target1"
+                    for (i in 2 until pipeCount.size) {
+                        instructions[pipeCount[i]] = "jmp $target2"
+                    }
+                    instructions.add("jmp $target2")
+                    pipeCount.add(instructions.size - 1)
+                }
+                pipeCount[0]++
                 current++
             }
+
             char == '?' -> {
-                val target1 = instructions.size + 1
-                val target2 = current + 1
+                val target1 = instructions.size
+                val target2 = instructions.size + 1
+
                 addInstruction("split $target1, $target2")
+                instructions[target1] = instructions[target1 - 1]
+                instructions[target1 - 1] = "split $target1, $target2"
+                if (pipeCount[0] != 0) {
+                    for (i in 2 until pipeCount.size) {
+                        instructions[pipeCount[i]] = "jmp $target2"
+                    }
+                }
                 current++
             }
+
             char == '+' -> {
-                val target1 = instructions.size + 2
-                val target2 = current + 1
+                val target1 = instructions.size - 1
+                val target2 = instructions.size + 1
                 addInstruction("split $target1, $target2")
-                val loopTarget = instructions.size - 2
-                instructions[instructions.size - 1] = "split $loopTarget, ${current + 1}"
+                if (pipeCount[0] != 0) {
+                    for (i in 2 until pipeCount.size) {
+                        instructions[pipeCount[i]] = "jmp $target2"
+                    }
+                }
                 current++
             }
+
             char == '*' -> {
-                val target1 = instructions.size - 1
-                val target2 = current + 1
+                val target1 = instructions.size
+                val target2 = instructions.size + 2
                 addInstruction("split $target1, $target2")
-                val loopTarget = instructions.size + 1
-                instructions[instructions.size - 1] = "split $loopTarget, ${current + 1}"
-                val prevTarget = instructions.size - 1
+                instructions[target1] = instructions[target1 - 1]
+                instructions[target1 - 1] = "split $target1, $target2"
+
+                val prevTarget = instructions.size - 2
                 addInstruction("jmp $prevTarget")
+                if (pipeCount[0] != 0) {
+                    for (i in 2 until pipeCount.size) {
+                        instructions[pipeCount[i]] = "jmp $target2"
+                    }
+                }
                 current++
 
             }
+
             else -> {
                 throw IllegalArgumentException("Неподдерживаемый символ в регулярном выражении: $char")
             }
@@ -94,8 +173,7 @@ fun generateInstructions(regex: String, alphabet: Set<Char>): List<String> {
 
 fun main() {
     val regex = "a*b+"
-    val alphabet = setOf('a', 'b', 'c')
-    val instructions = generateInstructions(regex, alphabet)
+    val instructions = generateInstructions(regex)
 
     println("Инструкции для регулярного выражения \"$regex\":")
     instructions.forEachIndexed { index, instruction ->
