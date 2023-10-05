@@ -180,7 +180,7 @@ fun main() {
         println("$index $instruction")
     }
 
-    val input = "aabbb"
+    val input = "aabbbb"
     val isMatch = executeInstructions(instructions, input)
     println("Результат сравнения: $isMatch")
 }
