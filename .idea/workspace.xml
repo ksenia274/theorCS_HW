@@ -4,11 +4,19 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="69ab3140-c397-499c-8ffb-ffa1371c062d" name="Changes" comment="First work. Tasks 1 and 2 complete. Task 3 in progress.">
-      <change afterPath="$PROJECT_DIR$/src/test/kotlin/RegexTest.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
+    <list default="true" id="69ab3140-c397-499c-8ffb-ffa1371c062d" name="Changes" comment="I have cooked something else.">
+      <change afterPath="$PROJECT_DIR$/src/main/kotlin/Moore.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/kotlin/DFATest.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/Third.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/Third.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/automaton.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/automaton.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/dfa_lecture_output.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/dfa_output.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/dfa_output.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/First.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/Second.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/Third.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/kotlin/NFATest.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/kotlin/NFAtoDFATest.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/kotlin/RegexTest.kt" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -33,6 +41,7 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
+        <option value="Kotlin Class" />
         <option value="Kotlin File" />
       </list>
     </option>
@@ -49,24 +58,25 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
-  <component name="RunManager" selected="Gradle.RegexTest.matchingTest7">
-    <configuration name="RegexTest.matchingTest1" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+}]]></component>
+  <component name="RunManager" selected="Kotlin.MooreKt">
+    <configuration name="DFATest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
@@ -79,7 +89,7 @@
           <list>
             <option value=":test" />
             <option value="--tests" />
-            <option value="&quot;RegexTest.matchingTest1&quot;" />
+            <option value="&quot;DFATest&quot;" />
           </list>
         </option>
         <option name="vmOptions" />
@@ -89,7 +99,7 @@
       <DebugAllEnabled>false</DebugAllEnabled>
       <method v="2" />
     </configuration>
-    <configuration name="RegexTest.matchingTest2" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+    <configuration name="DFATest.minimization test" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
@@ -102,7 +112,7 @@
           <list>
             <option value=":test" />
             <option value="--tests" />
-            <option value="&quot;RegexTest.matchingTest2&quot;" />
+            <option value="&quot;DFATest.minimization test&quot;" />
           </list>
         </option>
         <option name="vmOptions" />
@@ -112,7 +122,7 @@
       <DebugAllEnabled>false</DebugAllEnabled>
       <method v="2" />
     </configuration>
-    <configuration name="RegexTest.matchingTest3" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+    <configuration name="DFATest.minimization_test" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
@@ -125,7 +135,7 @@
           <list>
             <option value=":test" />
             <option value="--tests" />
-            <option value="&quot;RegexTest.matchingTest3&quot;" />
+            <option value="&quot;DFATest.minimization_test&quot;" />
           </list>
         </option>
         <option name="vmOptions" />
@@ -135,7 +145,7 @@
       <DebugAllEnabled>false</DebugAllEnabled>
       <method v="2" />
     </configuration>
-    <configuration name="RegexTest.matchingTest6" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+    <configuration name="DFATest.testIsAccepted" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
@@ -148,7 +158,7 @@
           <list>
             <option value=":test" />
             <option value="--tests" />
-            <option value="&quot;RegexTest.matchingTest6&quot;" />
+            <option value="&quot;DFATest.testIsAccepted&quot;" />
           </list>
         </option>
         <option name="vmOptions" />
@@ -158,36 +168,20 @@
       <DebugAllEnabled>false</DebugAllEnabled>
       <method v="2" />
     </configuration>
-    <configuration name="RegexTest.matchingTest7" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
-      <ExternalSystemSettings>
-        <option name="executionName" />
-        <option name="externalProjectPath" value="$PROJECT_DIR$" />
-        <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" value="" />
-        <option name="taskDescriptions">
-          <list />
-        </option>
-        <option name="taskNames">
-          <list>
-            <option value=":test" />
-            <option value="--tests" />
-            <option value="&quot;RegexTest.matchingTest7&quot;" />
-          </list>
-        </option>
-        <option name="vmOptions" />
-      </ExternalSystemSettings>
-      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
-      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
-      <DebugAllEnabled>false</DebugAllEnabled>
-      <method v="2" />
+    <configuration name="MooreKt" type="JetRunConfigurationType" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="MooreKt" />
+      <module name="theorCS.main" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Gradle.RegexTest.matchingTest7" />
-        <item itemvalue="Gradle.RegexTest.matchingTest6" />
-        <item itemvalue="Gradle.RegexTest.matchingTest1" />
-        <item itemvalue="Gradle.RegexTest.matchingTest2" />
-        <item itemvalue="Gradle.RegexTest.matchingTest3" />
+        <item itemvalue="Kotlin.MooreKt" />
+        <item itemvalue="Gradle.DFATest.minimization_test" />
+        <item itemvalue="Gradle.DFATest.minimization test" />
+        <item itemvalue="Gradle.DFATest.testIsAccepted" />
+        <item itemvalue="Gradle.DFATest" />
       </list>
     </recent_temporary>
   </component>
@@ -200,7 +194,9 @@
       <option name="presentableId" value="Default" />
       <updated>1696000122279</updated>
       <workItem from="1696000122848" duration="14065000" />
-      <workItem from="1696501852235" duration="10355000" />
+      <workItem from="1696501852235" duration="11715000" />
+      <workItem from="1696836265437" duration="1813000" />
+      <workItem from="1697139459432" duration="5593000" />
     </task>
     <task id="LOCAL-00001" summary="First work. Tasks 1 and 2 complete. Task 3 in progress.">
       <created>1696020228863</created>
@@ -209,7 +205,21 @@
       <option name="project" value="LOCAL" />
       <updated>1696020228863</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="I have cooked something.">
+      <created>1696538154057</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1696538154057</updated>
+    </task>
+    <task id="LOCAL-00003" summary="I have cooked something else.">
+      <created>1696538617634</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1696538617634</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -228,17 +238,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="First work. Tasks 1 and 2 complete. Task 3 in progress." />
-    <option name="LAST_COMMIT_MESSAGE" value="First work. Tasks 1 and 2 complete. Task 3 in progress." />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="kotlin-line">
-          <url>file://$PROJECT_DIR$/src/test/kotlin/RegexTest.kt</url>
-          <line>226</line>
-          <option name="timeStamp" value="25" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
+    <MESSAGE value="I have cooked something." />
+    <MESSAGE value="I have cooked something else." />
+    <option name="LAST_COMMIT_MESSAGE" value="I have cooked something else." />
   </component>
 </project>
