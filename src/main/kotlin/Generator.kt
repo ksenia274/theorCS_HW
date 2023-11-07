@@ -7,7 +7,7 @@ class Generator(regex: String) {
     private var pipeVisible = mutableListOf(pipeCount)
 
 
-    private fun selectAlphabet(regex: String): MutableSet<Char> {
+    private fun selectAlphabet(regex: String): MutableSet<Char> { //все, что не операторы, становится буквой
         val operands = setOf('+', '?', '|', '*', '(', ')')
         val alphabet = mutableSetOf<Char>()
         for (char in regex) {
@@ -22,7 +22,7 @@ class Generator(regex: String) {
         instructions.add(instruction)
     }
 
-    private fun checkPipeCount(target: Int) {
+    private fun checkPipeCount(target: Int) { //изменения индексов jmp в строках
         val j = pipeVisible.size - 1
         if (pipeVisible[j][0] != 0) {
             for (i in 2 until pipeVisible[j].size) {
@@ -31,7 +31,7 @@ class Generator(regex: String) {
         }
     }
 
-    private fun plusManip() {
+    private fun plusManip() { //манипуляции, когда в регулярном выражении встречается +
         val target1: Int
         val target2 = instructions.size + 1
         if (!prevISParenthesis) {
@@ -44,7 +44,7 @@ class Generator(regex: String) {
         checkPipeCount(target2)
     }
 
-    private fun questionManip() {
+    private fun questionManip() { //манипуляции, когда в регулярном выражении встречается ?
         val target1: Int
         val target2 = instructions.size + 1
         if (!prevISParenthesis) {
@@ -62,7 +62,7 @@ class Generator(regex: String) {
         checkPipeCount(target2)
     }
 
-    private fun replaceInstructions() {
+    private fun replaceInstructions() { //циклически перемещает инструкции (увеличивая на 1) для вставки других сверху
         for (i in instructions.size - 1 downTo parenthesisCount[parenthesisCount.size - 1] + 1) {
             val parts = instructions[i - 1].split(" ")
             var newInstruction = ""
@@ -80,7 +80,7 @@ class Generator(regex: String) {
         }
     }
 
-    private fun multManip() {
+    private fun multManip() { //манипуляции, когда в регулярном выражении встречается *
         val target1: Int
         val target2 = instructions.size + 2
         val prevTarget: Int
@@ -106,7 +106,7 @@ class Generator(regex: String) {
 
     }
 
-    private fun pipeManip() {
+    private fun pipeManip() {  //манипуляции, когда в регулярном выражении встречается  |
         if (!prevISParenthesis) {
             val j = pipeVisible.size - 1
             if (pipeVisible[j][0] == 0) {
@@ -158,7 +158,7 @@ class Generator(regex: String) {
 
     }
 
-    fun generateInstructions(regex: String): List<String> {
+    fun generateInstructions(regex: String): List<String> { //основная функция
         var current = 0
         while (current < regex.length) {
             when (val char = regex[current]) {
