@@ -9,7 +9,8 @@ class RegexTest {
     @Test
     fun generateCodesTest1() {
         val regex = "a+b+"
-        val instructions = generateInstructions(regex)
+        val generator = Generator(regex)
+        val instructions = generator.generateInstructions(regex)
         val result = listOf("char a",
                 "split 0, 2",
                 "char b",
@@ -22,7 +23,8 @@ class RegexTest {
     @Test
     fun generateCodesTest2() {
         val regex = "a*b+"
-        val instructions = generateInstructions(regex)
+        val generator = Generator(regex)
+        val instructions = generator.generateInstructions(regex)
         val result = listOf("split 1, 3",
             "char a",
             "jmp 0",
@@ -35,7 +37,8 @@ class RegexTest {
     @Test
     fun generateCodesTest3() {
         val regex = "a|cb+"
-        val instructions = generateInstructions(regex)
+        val generator = Generator(regex)
+        val instructions = generator.generateInstructions(regex)
         val result = listOf("split 1, 3",
             "char a",
             "jmp 6",
@@ -49,7 +52,8 @@ class RegexTest {
     @Test
     fun generateCodesTest4() {
         val regex = "a?b+"
-        val instructions = generateInstructions(regex)
+        val generator = Generator(regex)
+        val instructions = generator.generateInstructions(regex)
         val result = listOf("split 1, 2",
             "char a",
             "char b",
@@ -61,7 +65,8 @@ class RegexTest {
     @Test
     fun generateCodesTest5() {
         val regex = "abc+"
-        val instructions = generateInstructions(regex)
+        val generator = Generator(regex)
+        val instructions = generator.generateInstructions(regex)
         val result = listOf("char a",
             "char b",
             "char c",
@@ -73,8 +78,9 @@ class RegexTest {
 
     @Test
     fun generateCodesTest6() {
-        val regex = "a|b|c"
-        val instructions = generateInstructions(regex)
+        val regex = "(a)|(b)|(c)"
+        val generator = Generator(regex)
+        val instructions = generator.generateInstructions(regex)
         val result = listOf("split 1, 3, 5",
             "char a", "jmp 6", "char b", "jmp 6",
             "char c", "match")
@@ -83,8 +89,9 @@ class RegexTest {
     }
     @Test
     fun generateCodesTest7() {
-        val regex = "a|b*|c|d"
-        val instructions = generateInstructions(regex)
+        val regex = "(a)|(b*)|c|d"
+        val generator = Generator(regex)
+        val instructions = generator.generateInstructions(regex)
         val result = listOf("split 1, 3, 7, 9",
             "char a", "jmp 10", "split 4, 6",
                 "char b", "jmp 3", "jmp 10", "char c",
@@ -95,7 +102,8 @@ class RegexTest {
     @Test
     fun generateCodesTest8() {
         val regex = "a|b+|c+"
-        val instructions = generateInstructions(regex)
+        val generator = Generator(regex)
+        val instructions = generator.generateInstructions(regex)
         val result = listOf("split 1, 3, 6",
             "char a",
             "jmp 8",
@@ -111,7 +119,8 @@ class RegexTest {
     @Test
     fun generateCodesTest9() {
         val regex = "a|b|c?"
-        val instructions = generateInstructions(regex)
+        val generator = Generator(regex)
+        val instructions = generator.generateInstructions(regex)
         val result = listOf("split 1, 3, 5",
             "char a",
             "jmp 7",
@@ -127,7 +136,8 @@ class RegexTest {
     @Test
     fun generateCodesTest10() {
         val regex = "a|b|c*"
-        val instructions = generateInstructions(regex)
+        val generator = Generator(regex)
+        val instructions = generator.generateInstructions(regex)
         val result = listOf("split 1, 3, 5",
             "char a",
             "jmp 8",
@@ -144,7 +154,8 @@ class RegexTest {
     @Test
     fun matchingTest1() {
         val regex = "a+b+"
-        val instructions = generateInstructions(regex)
+        val generator = Generator(regex)
+        val instructions = generator.generateInstructions(regex)
         assertTrue( executeInstructions(instructions,"aabbb"))
         assertTrue( executeInstructions(instructions,"ab"))
         assertFalse( executeInstructions(instructions,"aaaa"))
@@ -156,7 +167,8 @@ class RegexTest {
     @Test
     fun matchingTest2() {
         val regex = "a*b+"
-        val instructions = generateInstructions(regex)
+        val generator = Generator(regex)
+        val instructions = generator.generateInstructions(regex)
         assertTrue( executeInstructions(instructions,"aabbb"))
         assertTrue( executeInstructions(instructions,"ab"))
         assertFalse( executeInstructions(instructions,"aaaa"))
@@ -168,7 +180,8 @@ class RegexTest {
     @Test
     fun matchingTest3() {
         val regex = "a|cb+"
-        val instructions = generateInstructions(regex)
+        val generator = Generator(regex)
+        val instructions = generator.generateInstructions(regex)
         assertTrue( executeInstructions(instructions,"a"))
         assertTrue( executeInstructions(instructions,"cb"))
         assertTrue( executeInstructions(instructions,"cbbbbb"))
@@ -181,7 +194,8 @@ class RegexTest {
     @Test
     fun matchingTest4() {
         val regex = "a?b+"
-        val instructions = generateInstructions(regex)
+        val generator = Generator(regex)
+        val instructions = generator.generateInstructions(regex)
         assertTrue( executeInstructions(instructions,"abbb"))
         assertTrue( executeInstructions(instructions,"ab"))
         assertFalse( executeInstructions(instructions,"aaaa"))
@@ -193,7 +207,8 @@ class RegexTest {
     @Test
     fun matchingTest5() {
         val regex = "abc+"
-        val instructions = generateInstructions(regex)
+        val generator = Generator(regex)
+        val instructions = generator.generateInstructions(regex)
         assertTrue( executeInstructions(instructions,"abc"))
         assertTrue( executeInstructions(instructions,"abcccc"))
         assertFalse( executeInstructions(instructions,"aaaa"))
@@ -205,7 +220,8 @@ class RegexTest {
     @Test
     fun matchingTest6() {
         val regex = "a|b|c"
-        val instructions = generateInstructions(regex)
+        val generator = Generator(regex)
+        val instructions = generator.generateInstructions(regex)
         assertTrue( executeInstructions(instructions,"a"))
         assertTrue( executeInstructions(instructions,"b"))
         assertTrue( executeInstructions(instructions,"c"))
@@ -222,7 +238,8 @@ class RegexTest {
     @Test
     fun matchingTest7() {
         val regex = "a|b+|c+"
-        val instructions = generateInstructions(regex)
+        val generator = Generator(regex)
+        val instructions = generator.generateInstructions(regex)
         assertTrue( executeInstructions(instructions,"a"))
         assertTrue( executeInstructions(instructions,"b"))
         assertTrue( executeInstructions(instructions,"c"))
