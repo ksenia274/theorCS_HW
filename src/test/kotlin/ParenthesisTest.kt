@@ -293,13 +293,13 @@ class ParenthesisTest {
 
     @Test
     fun matchingParenthesisTest9() {
-        val regex = "((a|b)+)|c+"
+        val regex = "(a|b*)(c+)"
         val generator = Generator(regex)
         val instructions = generator.generateInstructions(regex)
-        assertTrue( executeInstructions(instructions,"a"))
-        assertTrue( executeInstructions(instructions,"aaa"))
-        assertTrue( executeInstructions(instructions,"b"))
-        assertTrue( executeInstructions(instructions,"baabababb"))
+        assertTrue( executeInstructions(instructions,"ac"))
+        assertTrue( executeInstructions(instructions,"bbbbccc"))
+        assertTrue( executeInstructions(instructions,"bccc"))
+        assertFalse( executeInstructions(instructions,"baabababb"))
         assertFalse( executeInstructions(instructions,"abcaaaabccababccc"))
         assertFalse( executeInstructions(instructions,"abcabc"))
         assertFalse( executeInstructions(instructions,"ccabb"))
